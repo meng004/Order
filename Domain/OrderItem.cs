@@ -7,9 +7,24 @@ namespace Domain
 {
     public class OrderItem
     {
-        public Product Product { get; set; }
+        public OrderItem(Order order,Product product)
+        {
+            Order = order;
+            Product = product;
+        }
+        public Product Product { get;  }
 
-        public Order Order { get; set; }
+        private Order _order;
+
+        public Order Order
+        {
+            get { return _order; }
+            set
+            {
+                _order = value;
+                _order.OrderItems.Add(this);
+            }
+        }
 
         public int Count { get; set; }
 
